@@ -113,6 +113,21 @@ public class TicTacToeGUI implements ActionListener {
                 }
                 counter = 0; //Reset Counter
             }
+
+            //FOR DIAGONAL MATCH 3\\
+            if (buttons[1][1].getText().equals("X")) //Checks if middle has been designated as "X". A Diagonal match is only possible if the middle has been pressed
+            {
+                if (buttons[0][2].getText().equals("X") && buttons[2][0].getText().equals("X"))
+                {
+                    GameOver(true); //Win will be declared if after checking a horizontal row, 3 of the same Letter are found (3 in a row)
+                }
+
+                //Opposite Diagonal\\
+                if (buttons[0][0].getText().equals("X") && buttons[2][2].getText().equals("X"))
+                {
+                    GameOver(true); //Win will be declared if after checking a horizontal row, 3 of the same Letter are found (3 in a row)
+                }
+            }
         }
 
         //If Player 2
@@ -149,6 +164,21 @@ public class TicTacToeGUI implements ActionListener {
                     GameOver(true); //Win will be declared if after checking a horizontal row, 3 of the same Letter are found (3 in a row)
                 }
                 counter = 0; //Reset Counter
+            }
+
+            //CHECK FOR DIAGONAL MATCH\\
+            if (buttons[1][1].getText().equals("O")) //Checks if middle has been designated as "O". A Diagonal match is only possible if the middle has been pressed
+            {
+                if (buttons[0][2].getText().equals("O") && buttons[2][0].getText().equals("O"))
+                {
+                    GameOver(true); //Win will be declared if after checking a horizontal row, 3 of the same Letter are found (3 in a row)
+                }
+                //Opposite Diagonal\\
+                if (buttons[0][0].getText().equals("O") && buttons[2][2].getText().equals("O"))
+                {
+                    GameOver(true); //Win will be declared if after checking a horizontal row, 3 of the same Letter are found (3 in a row)
+                }
+
             }
         }
 
@@ -209,6 +239,7 @@ public class TicTacToeGUI implements ActionListener {
                     turnCount = turnCount + 1; //Adds 1 to the turn counter after each turn
                     check(i, j); //Passes through the x and y-axis, so they can be used for a check to see if a winner has been made. As well as this, The coordinates will be marked as that player's side
                     changePlayer(); //Next Player's Turn.
+                    buttons[i][j].removeActionListener(this); //This will disable the button from being clicked again. We are using this instead of setdisabled as setdisabled will grey out the button
                 }
             }
         }
